@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cài Đặt Cấu Hình Locket Gold Bản Free</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+      -webkit-user-select: none; user-select: none;
+    }
+    :root {
+      --primary: #f59e0b;
+      --primary-glow: rgba(245, 158, 11, 0.4);
+      --bg-dark: #070714;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-border: rgba(255, 255, 255, 0.12);
+    }
+    body {
+      background: var(--bg-dark);
+      color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      overflow-x: hidden;
+      position: relative;
+    }
+    /* VIDEO NỀN CHUYỂN ĐỘNG */
+    .video-bg-container {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0; overflow: hidden; pointer-events: none;
+    }
+    #bgVideo {
+      width: 100%; height: 100%; object-fit: cover; object-position: center;
+      filter: brightness(0.65) contrast(1.08);
+      transform: scale(1.02);
+    }
+    .video-overlay {
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at center, rgba(7, 7, 20, 0.45) 0%, rgba(7, 7, 20, 0.88) 100%);
+    }
+
+    /* NÚT ÂM THANH GÓC PHẢI */
+    .sound-btn {
+      position: fixed; top: 18px; right: 18px; z-index: 99;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(15, 23, 42, 0.85); border: 1.5px solid rgba(245, 158, 11, 0.4);
+      color: #fbbf24; display: flex; align-items: center; justify-content: center;
+      font-size: 1.15rem; cursor: pointer; backdrop-filter: blur(10px);
+      transition: all 0.3s ease; box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+    }
+    .sound-btn:hover {
+      transform: scale(1.1); background: rgba(245, 158, 11, 0.25);
+      border-color: #f59e0b; box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+    }
+
+    .aurora {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none; z-index: 1; overflow: hidden; opacity: 0.5;
+    }
+    .aurora-blob {
+      position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.35;
+      animation: float 14s ease-in-out infinite alternate;
+    }
+    .aurora-blob:nth-child(1) {
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, #f59e0b 0%, #d97706 70%);
+      top: -100px; left: -100px; animation-duration: 12s;
+    }
+    .aurora-blob:nth-child(2) {
+      width: 380px; height: 380px;
+      background: radial-gradient(circle, #ef4444 0%, #b91c1c 70%);
+      bottom: -80px; right: -80px; animation-duration: 16s; animation-delay: -4s;
+    }
+    .aurora-blob:nth-child(3) {
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, #ec4899 0%, #8b5cf6 70%);
+      top: 40%; left: 60%; animation-duration: 18s; animation-delay: -7s;
+    }
+    @keyframes float {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(40px, 30px) scale(1.08); }
+      100% { transform: translate(-30px, 50px) scale(0.94); }
+    }
+    .particles {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 1; overflow: hidden;
+    }
+    .particle {
+      position: absolute; border-radius: 50%; opacity: 0;
+      animation: rise 9s linear infinite;
+    }
+    @keyframes rise {
+      0%   { transform: translateY(105vh) scale(0.6); opacity: 0; }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.5; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+    .container {
+      position: relative; z-index: 2; width: 100%; max-width: 440px; text-align: center;
+    }
+    h1 {
+      font-size: 1.85rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 6px;
+      background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #fbbf24 100%);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer { 0%{background-position:0%} 100%{background-position:300%} }
+    .subtitle { color: #94a3b8; font-size: 0.88rem; margin-bottom: 20px; }
+    .card {
+      background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 215, 0, 0.25);
+      border-radius: 24px; padding: 26px 20px; width: 100%;
+      backdrop-filter: blur(16px); box-shadow: 0 12px 45px rgba(0, 0, 0, 0.5);
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .icon-wrap {
+      width: 76px; height: 76px; position: relative; margin-bottom: 14px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .icon-ring {
+      position: absolute; inset: -3px; border-radius: 50%;
+      background: conic-gradient(from 0deg, #f59e0b, #ef4444, #ec4899, #f59e0b);
+      animation: rotate 6s linear infinite; opacity: 0.85; filter: blur(2px);
+    }
+    @keyframes rotate { 100% { transform: rotate(360deg); } }
+    .icon-inner {
+      position: relative; width: 100%; height: 100%; border-radius: 50%;
+      background: #0f172a; display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; box-shadow: inset 0 2px 6px rgba(0,0,0,0.6);
+      overflow: hidden;
+    }
+    .icon-inner img {
+      width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block;
+    }
+    .file-name {
+      font-size: 0.95rem; font-weight: 700; color: #fde047; word-break: break-all;
+      margin-bottom: 8px; line-height: 1.4;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px;
+      border-radius: 999px; font-size: 0.76rem; font-weight: 600; margin-bottom: 14px;
+    }
+    .badge-ios { background: rgba(52, 211, 153, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); }
+    .badge-blocked { background: rgba(248, 113, 113, 0.15); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.3); }
+
+    /* KHUNG CẢNH BÁO SCAM */
+    .scam-box {
+      background: rgba(239, 68, 68, 0.14); border: 1.5px solid #ef4444;
+      border-radius: 14px; padding: 12px 14px; color: #fecaca; font-size: 0.82rem;
+      line-height: 1.5; margin-bottom: 16px; text-align: center; width: 100%;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+    }
+    .scam-box .scam-title {
+      color: #ef4444; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 4px;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .scam-box .scam-warning {
+      font-size: 0.95rem; font-weight: 800; color: #fef08a; margin: 3px 0; text-transform: uppercase;
+    }
+    .scam-box a { color: #38bdf8; font-weight: 700; text-decoration: underline; }
+
+    .warning-box {
+      background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.25);
+      border-radius: 12px; padding: 12px 14px; color: #fca5a5; font-size: 0.8rem;
+      line-height: 1.45; margin-bottom: 16px; text-align: left; display: none; width: 100%;
+    }
+    .warning-box strong { color: #f87171; }
+
+    .btn-group { width: 100%; }
+    .btn {
+      width: 100%; padding: 15px 20px; border-radius: 14px; font-size: 1rem;
+      font-weight: 700; border: none; cursor: pointer; transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
+      display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;
+      box-sizing: border-box;
+    }
+    .btn-download {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #000; box-shadow: 0 4px 22px rgba(245, 158, 11, 0.4);
+    }
+    .btn-download:hover { box-shadow: 0 6px 30px rgba(245, 158, 11, 0.6); transform: translateY(-2px); }
+
+    .guide-box {
+      text-align: left; background: rgba(0, 0, 0, 0.35); padding: 14px 16px; border-radius: 14px;
+      margin-top: 18px; width: 100%; font-size: 0.82rem; color: #cbd5e1; line-height: 1.6;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .guide-step { margin-top: 6px; }
+    .guide-step b { color: #fde047; }
+    .tag-name {
+      display: inline-block; background: rgba(245, 158, 11, 0.15); color: #fbbf24;
+      padding: 1px 7px; border-radius: 6px; font-weight: 700; font-size: 0.78rem; border: 1px solid rgba(245, 158, 11, 0.3);
+      margin-top: 3px; word-break: break-all;
+    }
+
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+      background: rgba(15, 23, 42, 0.95); color: #fff; padding: 11px 22px; border-radius: 999px;
+      font-size: 0.85rem; font-weight: 600; box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1);
+      opacity: 0; pointer-events: none; transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      z-index: 9999; white-space: nowrap;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    .toast.error { background: rgba(239, 68, 68, 0.95); border-color: rgba(254, 202, 202, 0.3); }
+  </style>
+</head>
+<body oncontextmenu="return false;" onselectstart="return false;" ondragstart="return false;">
+
+<!-- VIDEO NỀN CHUYỂN ĐỘNG (WALLPAPER) -->
+<div class="video-bg-container">
+  <video id="bgVideo" autoplay loop muted playsinline preload="auto">
+    <source src="wallpaper.mp4" type="video/mp4">
+  </video>
+  <div class="video-overlay"></div>
+</div>
+
+<!-- NÚT BẬT / TẮT ÂM THANH GÓC TRÊN -->
+<button id="soundToggle" class="sound-btn" title="Bật / Tắt âm thanh">
+  <i class="fa-solid fa-volume-xmark" id="soundIcon"></i>
+</button>
+
+<div class="aurora">
+  <div class="aurora-blob"></div>
+  <div class="aurora-blob"></div>
+  <div class="aurora-blob"></div>
+</div>
+<div class="particles" id="particles"></div>
+<div class="container">
+  <h1>Locket Gold Bản Free</h1>
+  <p class="subtitle" id="subTitle">Hệ thống cài đặt hồ sơ DNS Free tự động</p>
+  
+  <div class="card">
+    <div class="icon-wrap">
+      <div class="icon-ring"></div>
+      <div class="icon-inner" id="cardIcon">
+        <img src="icon.jpg" onerror="this.onerror=null;this.src='data:image/jpeg;base64,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'" alt="Locket Logo" />
+      </div>
+    </div>
+    
+    <div class="file-name" id="fileName">LOCKET FREE NÓ ĐEM BÁN - Zalo Admin: 0339242745</div>
+    
+    <div id="deviceBadge" class="badge">Đang kiểm tra thiết bị...</div>
+
+    <!-- KHUNG CẢNH BÁO SCAM CẤM BÁN BẢN FREE -->
+    <div class="scam-box">
+      <div class="scam-title"><i class="fa-solid fa-triangle-exclamation"></i> CẢNH BÁO LỪA ĐẢO / SCAM</div>
+      <p>Đây là bản <b>LOCKET GOLD FREE</b> phát hành miễn phí!</p>
+      <div class="scam-warning">🚫 LOCKET FREE NÓ ĐEM BÁN! 🚫</div>
+      <p>Nếu bạn đã bỏ tiền mua bản này, bạn đã bị lừa đảo (SCAM)!</p>
+      <div class="scam-contact" style="margin-top:4px;">
+        Hỗ trợ Zalo Admin: <a href="https://zalo.me/0339242745" target="_blank">0339242745</a>
+      </div>
+    </div>
+
+    <div id="warningBox" class="warning-box">
+      <strong>⚠️ Lưu ý thiết bị:</strong>
+      <p id="warningText">Cấu hình DNS chỉ hỗ trợ cài đặt trực tiếp trên iPhone / iPad qua trình duyệt Safari.</p>
+    </div>
+
+    <!-- NÚT CÀI ĐẶT CẤU HÌNH FREE (DẪN THẲNG SANG /install) -->
+    <div class="btn-group">
+      <a class="btn btn-download" id="btnDownload" href="/install">
+        <i class="fa-brands fa-apple"></i> Cài Đặt Cấu Hình Free
+      </a>
+    </div>
+
+    <!-- NÚT VƯỢT LINK NHẬN THÊM LƯỢT AI MIỄN PHÍ -->
+    <div style="width:100%; margin-top:12px;">
+      <a class="btn" href="/daily-ai" style="background:linear-gradient(135deg,#8b5cf6,#ec4899); color:#fff; text-decoration:none; box-shadow:0 4px 20px rgba(139,92,246,0.45); font-size:0.95rem;">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> Vượt Link Nhận +3 Lượt AI (Free)
+      </a>
+    </div>
+
+    <div class="guide-box">
+      <b>📌 Hướng dẫn kích hoạt 3 bước trên Safari:</b>
+      <div class="guide-step"><b>1.</b> Bấm <b>Cài Đặt Cấu Hình Free</b> &rarr; Chọn <b>Cho phép</b> tải hồ sơ.</div>
+      <div class="guide-step"><b>2.</b> Vào <b>Cài đặt iPhone</b> &rarr; <b>Đã tải về hồ sơ</b> &rarr; Bấm Cài đặt cấu hình: <br><span class="tag-name">LOCKET FREE NÓ ĐEM BÁN - Zalo Admin: 0339242745</span></div>
+      <div class="guide-step"><b>3.</b> Vào <b>Cài đặt</b> &rarr; <b>Cài đặt chung</b> &rarr; <b>Giới thiệu</b> &rarr; <b>Cài đặt tin cậy chứng nhận</b> &rarr; Gạt bật xanh: <br><span class="tag-name">locket gold ca</span></div>
+      <div class="guide-step"><b>4.</b> Mở app Locket và tận hưởng Gold Free vĩnh viễn (PTB 64 tỉnh thành, Dazz Cam, AI)!</div>
+      <div class="guide-step" style="border-top:1px dashed rgba(255,255,255,0.15); padding-top:8px; margin-top:10px;">
+        <b>🎁 Nhận thêm lượt AI:</b> Bấm <b>Vượt Link Nhận +3 Lượt AI</b> &rarr; hoàn thành vượt link &rarr; nhập Username để nhận luôn +3 lượt AI (mỗi ngày nhận tối đa 3 lần)!
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ==========================================
+  // HỆ THỐNG BẢO VỆ CHỐNG CRACK / CHỐNG F12 & DEVTOOLS TOÀN DIỆN
+  // ==========================================
+  (function initAntiCrack() {
+    let devtoolsDetected = false;
+
+    function punish() {
+      if (devtoolsDetected) return;
+      devtoolsDetected = true;
+      try {
+        document.body.innerHTML = `
+          <div style="min-height:100vh;background:#070714;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ef4444;font-family:sans-serif;text-align:center;padding:24px;">
+            <div style="font-size:3.5rem;margin-bottom:12px;">🚫</div>
+            <h2 style="font-size:1.6rem;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px;">CẢNH BÁO CAN THIỆP TRÁI PHÉP</h2>
+            <p style="color:#cbd5e1;max-width:400px;font-size:0.95rem;line-height:1.6;">
+              Phát hiện công cụ kiểm tra (Developer Tools / Inspect). Hệ thống đã tự động khóa giao diện để bảo vệ tác quyền!
+            </p>
+            <a href="javascript:location.reload()" style="margin-top:20px;padding:10px 24px;background:#ef4444;color:#fff;text-decoration:none;border-radius:10px;font-weight:bold;font-size:0.9rem;">Tải Lại Trang</a>
+          </div>
+        `;
+      } catch (e) {
+        window.location.replace("about:blank");
+      }
+      // Vòng lặp đóng băng DevTools
+      setInterval(() => {
+        (function() { return false; }['constructor']('debugger')());
+      }, 50);
+    }
+
+    // 1. Chặn toàn bộ phím tắt DevTools, View-Source, Copy
+    document.addEventListener('keydown', function(e) {
+      const isCmdOrCtrl = e.ctrlKey || e.metaKey;
+      const key = (e.key || '').toLowerCase();
+      const code = e.keyCode || e.which;
+
+      // F12
+      if (code === 123 || key === 'f12') {
+        e.preventDefault();
+        e.stopPropagation();
+        punish();
+        return false;
+      }
+      // Ctrl/Cmd + U (View Source)
+      if (isCmdOrCtrl && (key === 'u' || code === 85)) {
+        e.preventDefault();
+        e.stopPropagation();
+        showToast('⚠️ Tính năng xem mã nguồn (Ctrl+U) đã bị chặn!', true);
+        return false;
+      }
+      // Ctrl/Cmd + Shift + I / J / C (DevTools, Inspect, Console)
+      if (isCmdOrCtrl && e.shiftKey && (key === 'i' || key === 'j' || key === 'c' || code === 73 || code === 74 || code === 67)) {
+        e.preventDefault();
+        e.stopPropagation();
+        punish();
+        return false;
+      }
+      // Ctrl/Cmd + S (Lưu trang) & Ctrl/Cmd + P (In) & Ctrl/Cmd + A (Chọn tất cả)
+      if (isCmdOrCtrl && (key === 's' || key === 'p' || key === 'a' || code === 83 || code === 80 || code === 65)) {
+        e.preventDefault();
+        return false;
+      }
+    }, true);
+
+    // 2. Chặn chuột phải, sao chép, cắt, kéo thả
+    ['contextmenu', 'copy', 'cut', 'dragstart'].forEach(event => {
+      document.addEventListener(event, e => {
+        e.preventDefault();
+        return false;
+      }, true);
+    });
+
+    // 3. Vô hiệu hóa Console & Chống trích xuất log
+    try {
+      const noop = function() {};
+      ['log', 'debug', 'info', 'warn', 'error', 'table', 'clear', 'dir'].forEach(m => {
+        try { Object.defineProperty(console, m, { value: noop, writable: false }); } catch (err) {}
+      });
+    } catch (err) {}
+
+    // 4. Phát hiện DevTools bằng bẫy thời gian Debugger (Timing Attack)
+    setInterval(() => {
+      const start = Date.now();
+      (function() { return false; }['constructor']('debugger')());
+      if (Date.now() - start > 100) {
+        punish();
+      }
+    }, 600);
+
+    // 5. Phát hiện DevTools mở bằng kích thước cửa sổ trên Desktop
+    if (!/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      window.addEventListener('resize', () => {
+        const threshold = 160;
+        const widthDiff = window.outerWidth - window.innerWidth > threshold;
+        const heightDiff = window.outerHeight - window.innerHeight > threshold;
+        if (widthDiff || heightDiff) {
+          punish();
+        }
+      });
+    }
+  })();
+
+  // ==========================================
+  // NHẬN DIỆN MỌI THIẾT BỊ VÀ PHIÊN BẢN IOS
+  // ==========================================
+  function isAppleDevice() {
+    const ua = navigator.userAgent || navigator.vendor || window.opera || '';
+    const platform = navigator.platform || '';
+    const isTouchMac = platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+    return /iPhone|iPad|iPod/i.test(ua) || isTouchMac || /CriOS|FxiOS|EdgiOS|CFNetwork/i.test(ua);
+  }
+
+  function getPlatformInfo() {
+    const ua = navigator.userAgent || '';
+    if (isAppleDevice()) return { isIOS: true, name: 'iOS (iPhone / iPad)' };
+    if (/Android/i.test(ua)) return { isIOS: false, name: 'Android' };
+    if (/Windows/i.test(ua)) return { isIOS: false, name: 'Máy tính (Windows)' };
+    if (/Macintosh/i.test(ua) && !(navigator.maxTouchPoints > 1)) return { isIOS: false, name: 'Máy tính (macOS)' };
+    if (/Linux/i.test(ua)) return { isIOS: false, name: 'Máy tính (Linux)' };
+    return { isIOS: false, name: 'Thiết bị khác' };
+  }
+
+  const platformInfo = getPlatformInfo();
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const badge = document.getElementById('deviceBadge');
+    const warningBox = document.getElementById('warningBox');
+    const warningText = document.getElementById('warningText');
+    const btn = document.getElementById('btnDownload');
+    const subTitle = document.getElementById('subTitle');
+
+    if (platformInfo.isIOS) {
+      badge.className = 'badge badge-ios';
+      badge.innerHTML = '✓ ' + platformInfo.name + ' - Khả dụng tải ngay';
+      subTitle.innerHTML = 'Ấn <strong style="color:#fde047">Cài Đặt Cấu Hình Free</strong> để mở hồ sơ trong Safari';
+      warningBox.style.display = 'none';
+    } else {
+      badge.className = 'badge badge-blocked';
+      badge.innerHTML = '⚠️ ' + platformInfo.name + ' (Khuyên mở trên Safari iPhone)';
+      warningBox.style.display = 'block';
+      warningText.innerHTML = 'Bạn đang mở trên <strong>' + platformInfo.name + '</strong>. Bạn vẫn có thể tải hồ sơ, nhưng để kích hoạt thành công trên Locket hãy <strong>mở liên kết này bằng trình duyệt Safari trên iPhone/iPad</strong> nhé!';
+    }
+
+    const bgVideo = document.getElementById('bgVideo');
+    const soundToggle = document.getElementById('soundToggle');
+    const soundIcon = document.getElementById('soundIcon');
+
+    function toggleSound() {
+      if (!bgVideo) return;
+      if (bgVideo.muted) {
+        bgVideo.muted = false;
+        bgVideo.volume = 1.0;
+        bgVideo.play().catch(() => {});
+        if (soundIcon) soundIcon.className = 'fa-solid fa-volume-high';
+        showToast('🔊 Đã bật âm thanh', false);
+      } else {
+        bgVideo.muted = true;
+        if (soundIcon) soundIcon.className = 'fa-solid fa-volume-xmark';
+        showToast('🔇 Đã tắt âm thanh', false);
+      }
+    }
+
+    if (soundToggle) {
+      soundToggle.addEventListener('click', toggleSound);
+    }
+
+    // Cho phép tải được trên mọi iOS và thiết bị, PHÁT ÂM THANH KHI TẢI CẤU HÌNH
+    btn.addEventListener('click', (e) => {
+      if (bgVideo) {
+        bgVideo.muted = false;
+        bgVideo.volume = 1.0;
+        bgVideo.currentTime = 0; // Phát lại âm thanh từ đầu
+        bgVideo.play().catch(() => {});
+        if (soundIcon) soundIcon.className = 'fa-solid fa-volume-high';
+      }
+      showToast('🔊 Đang phát âm thanh & tải hồ sơ...', false);
+    });
+  });
+
+  function showToast(msg, isError) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast' + (isError ? ' error' : '');
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => t.classList.remove('show'), 3500);
+  }
+
+  // Hiệu ứng hạt nền
+  const pContainer = document.getElementById('particles');
+  const colors = ['#f59e0b','#ef4444','#fbbf24','#ec4899','#38bdf8'];
+  for (let i = 0; i < 24; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 7 + 4;
+    p.style.cssText = 'width:'+size+'px;height:'+size+'px;left:'+(Math.random()*100)+'%;background:'+colors[i%colors.length]+';animation-duration:'+(Math.random()*10+8)+'s;animation-delay:'+(Math.random()*12)+'s;';
+    pContainer.appendChild(p);
+  }
+</script>
+</body>
+</html>
